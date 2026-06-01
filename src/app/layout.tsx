@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   description:
     "A collection of free, fast developer tools. Encode, decode, hash, convert, format, and more — all client-side in your browser.",
   keywords: "developer tools, web tools, online tools, encoder, decoder, converter, formatter, generator, hash, dev utilities",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

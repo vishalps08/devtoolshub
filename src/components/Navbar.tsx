@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X, Zap, Sun, Moon } from "lucide-react";
+import Image from "next/image";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 export default function Navbar() {
@@ -13,9 +14,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur-xl dark:border-white/5 dark:bg-[#13131a]/80">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 text-xl font-bold tracking-tight text-zinc-900 dark:text-white">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 shadow-md shadow-violet-500/20">
-            <Zap className="h-4 w-4 text-white" />
-          </span>
+          <Image src="/logo.svg" alt="DevTools Hub" width={32} height={32} className="rounded-lg shadow-md shadow-violet-500/20" />
           Dev<span className="text-violet-600 dark:text-violet-400">Tools</span> <span className="text-sm font-normal text-zinc-400 dark:text-zinc-500">Hub</span>
         </Link>
 

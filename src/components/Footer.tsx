@@ -1,4 +1,4 @@
-import { Zap } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -7,9 +7,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center gap-6 md:flex-row md:justify-between">
           <Link href="/" className="flex items-center gap-2 text-lg font-bold text-zinc-900 dark:text-white">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600">
-              <Zap className="h-3.5 w-3.5 text-white" />
-            </span>
+            <Image src="/logo.svg" alt="DevTools Hub" width={28} height={28} className="rounded-md" />
             Dev<span className="text-violet-600 dark:text-violet-400">Tools</span> <span className="text-sm font-normal text-zinc-400 dark:text-zinc-500">Hub</span>
           </Link>
 
