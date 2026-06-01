@@ -1,6 +1,6 @@
 import Link from "next/link";
-import * as Icons from "lucide-react";
 import { ArrowRight } from "lucide-react";
+import { getIcon } from "@/lib/get-icon";
 import type { CategoryInfo } from "@/lib/tools";
 import { getToolsByCategory } from "@/lib/tools";
 
@@ -9,7 +9,7 @@ interface CategoryCardProps {
 }
 
 export default function CategoryCard({ category }: CategoryCardProps) {
-  const IconComponent = (Icons as Record<string, React.ComponentType<{ className?: string }>>)[category.icon] ?? Icons.Folder;
+  const Icon = getIcon(category.icon);
   const count = getToolsByCategory(category.name).length;
 
   return (
@@ -20,7 +20,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
       <div>
         <div className="flex items-center justify-between">
           <div className={`flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${category.color} shadow-md transition-transform duration-300 group-hover:scale-110`}>
-            <IconComponent className="h-5 w-5 text-white" />
+            <Icon className="h-5 w-5 text-white" />
           </div>
           <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-500 dark:bg-white/5 dark:text-zinc-400">
             {count} tools

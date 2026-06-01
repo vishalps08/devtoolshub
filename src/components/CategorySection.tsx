@@ -1,4 +1,4 @@
-import * as Icons from "lucide-react";
+import { getIcon } from "@/lib/get-icon";
 import type { Tool, Category } from "@/lib/tools";
 import ToolCard from "./ToolCard";
 
@@ -10,7 +10,7 @@ interface CategorySectionProps {
 }
 
 export default function CategorySection({ name, icon, color, tools }: CategorySectionProps) {
-  const IconComponent = (Icons as Record<string, React.ComponentType<{ className?: string }>>)[icon] ?? Icons.Folder;
+  const Icon = getIcon(icon);
 
   if (tools.length === 0) return null;
 
@@ -18,7 +18,7 @@ export default function CategorySection({ name, icon, color, tools }: CategorySe
     <section>
       <div className="mb-4 flex items-center gap-3">
         <div className={`flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br ${color}`}>
-          <IconComponent className="h-4 w-4 text-white" />
+          <Icon className="h-4 w-4 text-white" />
         </div>
         <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">{name}</h2>
         <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-500 dark:bg-white/5 dark:text-zinc-500">

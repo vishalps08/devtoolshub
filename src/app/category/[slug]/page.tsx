@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import * as Icons from "lucide-react";
 import { ArrowLeft } from "lucide-react";
+import { getIcon } from "@/lib/get-icon";
 import { categories, getCategoryBySlug, getToolsByCategory } from "@/lib/tools";
 import ToolCard from "@/components/ToolCard";
 
@@ -20,7 +20,7 @@ export default async function CategoryPage({ params }: Props) {
   if (!category) return notFound();
 
   const tools = getToolsByCategory(category.name);
-  const IconComponent = (Icons as Record<string, React.ComponentType<{ className?: string }>>)[category.icon] ?? Icons.Folder;
+  const Icon = getIcon(category.icon);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
@@ -34,7 +34,7 @@ export default async function CategoryPage({ params }: Props) {
 
       <div className="flex items-center gap-3">
         <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${category.color} shadow-md`}>
-          <IconComponent className="h-5 w-5 text-white" />
+          <Icon className="h-5 w-5 text-white" />
         </div>
         <div>
           <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">{category.name}</h1>

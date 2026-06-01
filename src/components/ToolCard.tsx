@@ -1,5 +1,5 @@
 import Link from "next/link";
-import * as Icons from "lucide-react";
+import { getIcon } from "@/lib/get-icon";
 import type { Tool } from "@/lib/tools";
 
 interface ToolCardProps {
@@ -8,7 +8,7 @@ interface ToolCardProps {
 }
 
 export default function ToolCard({ tool, accentGradient }: ToolCardProps) {
-  const IconComponent = (Icons as Record<string, React.ComponentType<{ className?: string }>>)[tool.icon] ?? Icons.Wrench;
+  const Icon = getIcon(tool.icon);
 
   return (
     <Link
@@ -18,7 +18,7 @@ export default function ToolCard({ tool, accentGradient }: ToolCardProps) {
       <div
         className={`flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br ${accentGradient} shadow-md transition-transform duration-300 group-hover:scale-110`}
       >
-        <IconComponent className="h-5 w-5 text-white" />
+        <Icon className="h-5 w-5 text-white" />
       </div>
 
       <div>
