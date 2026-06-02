@@ -1,14 +1,14 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { Zap, BookOpen } from "lucide-react";
 import { tools, categories } from "@/lib/tools";
-import SearchBar from "@/components/SearchBar";
 import CategoryCard from "@/components/CategoryCard";
 import ToolCard from "@/components/ToolCard";
+import { useSearch } from "@/components/SearchProvider";
 
 export default function Home() {
-  const [query, setQuery] = useState("");
+  const { query } = useSearch();
 
   const filtered = useMemo(() => {
     if (!query.trim()) return null;
@@ -22,24 +22,6 @@ export default function Home() {
 
   return (
     <div className="bg-grid relative">
-      {/* Hero */}
-      <section className="relative mx-auto max-w-7xl px-4 pb-4 pt-8 sm:px-6 sm:pt-10 lg:px-8">
-        <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div className="text-center sm:text-left">
-            <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-3xl">
-              Dev<span className="text-violet-600 dark:text-violet-400">Tools</span> Hub
-              <span className="ml-2 align-middle text-xs font-medium text-zinc-400 dark:text-zinc-500">50+ free tools</span>
-            </h1>
-            <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-              Built for developers — encode, hash, format, convert & debug faster, all in your browser.
-            </p>
-          </div>
-          <div className="w-full max-w-xs sm:w-72">
-            <SearchBar value={query} onChange={setQuery} />
-          </div>
-        </div>
-      </section>
-
       {/* Search results overlay */}
       {filtered ? (
         <section className="relative mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
