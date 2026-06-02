@@ -9,15 +9,26 @@ export async function POST(req: NextRequest) {
 
     const target = url.startsWith("http") ? url : `https://${url}`;
     const start = Date.now();
-    const res = await fetch(target, {
+
+    // Try HEAD first, fall back to GET if it fails or returns 4xx/5xx
+    let res = await fetch(target, {
       method: "HEAD",
       redirect: "follow",
       signal: AbortSignal.timeout(10000),
     });
+
+    if (res.status >= 400) {
+      res = await fetch(target, {
+        method: "GET",
+        redirect: "follow",
+        signal: AbortSignal.timeout(10000),
+      });
+    }
+
     const elapsed = Date.now() - start;
 
     return NextResponse.json({
-      online: true,
+      online: res.status < 400,
       status: res.status,
       statusText: res.statusText,
       responseTime: elapsed,

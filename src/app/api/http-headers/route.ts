@@ -8,11 +8,21 @@ export async function POST(req: NextRequest) {
     }
 
     const target = url.startsWith("http") ? url : `https://${url}`;
-    const res = await fetch(target, {
+
+    // Try HEAD first, fall back to GET if it fails
+    let res = await fetch(target, {
       method: "HEAD",
       redirect: "follow",
       signal: AbortSignal.timeout(10000),
     });
+
+    if (res.status >= 400) {
+      res = await fetch(target, {
+        method: "GET",
+        redirect: "follow",
+        signal: AbortSignal.timeout(10000),
+      });
+    }
 
     const headers: Record<string, string> = {};
     res.headers.forEach((value, key) => {
